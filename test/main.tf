@@ -6,9 +6,9 @@ module "minimal" {
   service_name       = ""
   service_env        = ""
   container_def_json = ""
-  desired_count      = ""
+  desired_count      = "1"
   lb_container_name  = ""
-  lb_container_port  = ""
+  lb_container_port  = "80"
   tg_arn             = ""
   ecsServiceRole_arn = ""
 }
@@ -16,20 +16,32 @@ module "minimal" {
 module "full" {
   source = "../"
 
-  cluster_id                         = ""
-  service_name                       = ""
-  service_env                        = ""
-  container_def_json                 = ""
-  desired_count                      = ""
-  lb_container_name                  = ""
-  lb_container_port                  = ""
-  tg_arn                             = ""
-  ecsServiceRole_arn                 = ""
+  cluster_id         = ""
+  service_name       = ""
+  service_env        = ""
+  container_def_json = ""
+  desired_count      = "1"
+  lb_container_name  = ""
+  lb_container_port  = "80"
+  tg_arn             = ""
+  ecsServiceRole_arn = ""
+
+  availability_zone_rebalancing      = true
   volumes                            = []
   task_role_arn                      = ""
-  network_mode                       = ""
-  deployment_maximum_percent         = ""
-  deployment_minimum_healthy_percent = ""
+  network_mode                       = "bridge"
+  deployment_maximum_percent         = "200"
+  deployment_minimum_healthy_percent = "50"
+  ordered_placement_strategy = [
+    {
+      type  = "spread"
+      field = "attribute:ecs.availability-zone"
+    },
+    {
+      type  = "spread"
+      field = "instanceId"
+    }
+  ]
 }
 
 output "task_def_arn" {

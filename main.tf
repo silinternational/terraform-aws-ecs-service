@@ -54,9 +54,15 @@ resource "aws_ecs_service" "service" {
   deployment_maximum_percent         = var.deployment_maximum_percent
   deployment_minimum_healthy_percent = var.deployment_minimum_healthy_percent
 
-  ordered_placement_strategy {
-    type  = "spread"
-    field = "instanceId"
+  availability_zone_rebalancing = var.availability_zone_rebalancing
+
+  dynamic "ordered_placement_strategy" {
+    for_each = var.ordered_placement_strategy
+
+    content {
+      field = try(ordered_placement_strategy.value.field, null)
+      type  = ordered_placement_strategy.value.type
+    }
   }
 
   load_balancer {
