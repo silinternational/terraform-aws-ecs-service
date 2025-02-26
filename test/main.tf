@@ -1,26 +1,39 @@
 
-/*
- * TODO: complete these basic instantiations of the module, with the base purpose of
- * validating the syntax of module code automatically when pushed to version control.
- * One instance should use the minimum allowable set of inputs. The other should have
- * the full complement of inputs. You may also wish to include module outputs to
- * enforce the presence of module outputs.
- */
-
 module "minimal" {
   source = "../"
 
-  variable_name = "foo"
+  cluster_id         = ""
+  service_name       = ""
+  service_env        = ""
+  container_def_json = ""
+  desired_count      = ""
+  lb_container_name  = ""
+  lb_container_port  = ""
+  tg_arn             = ""
+  ecsServiceRole_arn = ""
 }
 
 module "full" {
   source = "../"
 
-  variable_name = "foo"
+  cluster_id                         = ""
+  service_name                       = ""
+  service_env                        = ""
+  container_def_json                 = ""
+  desired_count                      = ""
+  lb_container_name                  = ""
+  lb_container_port                  = ""
+  tg_arn                             = ""
+  ecsServiceRole_arn                 = ""
+  volumes                            = []
+  task_role_arn                      = ""
+  network_mode                       = ""
+  deployment_maximum_percent         = ""
+  deployment_minimum_healthy_percent = ""
 }
 
-output "an_output" {
-  value = module.minimal.output_name
+output "task_def_arn" {
+  value = module.minimal.task_def_arn
 }
 
 provider "aws" {
