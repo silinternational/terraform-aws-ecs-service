@@ -42,10 +42,16 @@ variable "ecsServiceRole_arn" {
  * Optional Variables
  */
 
+variable "availability_zone_rebalancing" {
+  description = "When true, ECS automatically redistributes tasks within a service across Availability Zones"
+  type        = bool
+  default     = false
+}
+
 variable "volumes" {
-  default     = []
   description = "A list of volume definitions in JSON format that containers in your task may use"
   type        = list(any)
+  default     = []
 }
 
 variable "task_role_arn" {
@@ -66,4 +72,13 @@ variable "deployment_maximum_percent" {
 variable "deployment_minimum_healthy_percent" {
   type    = string
   default = 50
+}
+
+variable "ordered_placement_strategy" {
+  description = ""
+  type        = list(any)
+  default = [{
+    type  = "spread"
+    field = "instanceId"
+  }]
 }
