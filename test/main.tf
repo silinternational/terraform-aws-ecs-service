@@ -26,7 +26,7 @@ module "full" {
   tg_arn             = ""
   ecsServiceRole_arn = ""
 
-  availability_zone_rebalancing      = true
+  availability_zone_rebalancing      = "ENABLED"
   volumes                            = []
   task_role_arn                      = ""
   network_mode                       = "bridge"

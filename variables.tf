@@ -43,9 +43,12 @@ variable "ecsServiceRole_arn" {
  */
 
 variable "availability_zone_rebalancing" {
-  description = "When true, ECS automatically redistributes tasks within a service across Availability Zones"
-  type        = bool
-  default     = false
+  description = <<EOF
+    "When enabled, ECS automatically redistributes tasks within a service across Availability Zones. Must be
+    "either \"ENABLED\" or \"DISABLED\"."
+  EOF
+  type        = string
+  default     = "DISABLED"
 }
 
 variable "volumes" {
