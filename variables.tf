@@ -85,3 +85,8 @@ variable "ordered_placement_strategy" {
     field = "instanceId"
   }]
 }
+
+variable "execution_role_arn" {
+  type    = string
+  default = ""
+}
