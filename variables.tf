@@ -87,6 +87,7 @@ variable "ordered_placement_strategy" {
 }
 
 variable "execution_role_arn" {
-  type    = string
-  default = ""
+  description = "The IAM role that allows ECS to make AWS API calls on your behalf, such as to pull container images from ECR when using Fargate or to reference secrets from SSM Parameter Store."
+  type        = string
+  default     = ""
 }
