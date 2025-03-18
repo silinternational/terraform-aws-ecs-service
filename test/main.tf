@@ -7,9 +7,6 @@ module "minimal" {
   service_env        = ""
   container_def_json = ""
   desired_count      = "1"
-  lb_container_name  = ""
-  lb_container_port  = "80"
-  tg_arn             = ""
   ecsServiceRole_arn = ""
 }
 
@@ -21,17 +18,20 @@ module "full" {
   service_env        = ""
   container_def_json = ""
   desired_count      = "1"
-  lb_container_name  = ""
-  lb_container_port  = "80"
-  tg_arn             = ""
+
+  load_balancer = [{
+    target_group_arn = ""
+    container_name   = ""
+    container_port   = 80
+  }]
   ecsServiceRole_arn = ""
 
   availability_zone_rebalancing      = "ENABLED"
   volumes                            = []
   task_role_arn                      = ""
   network_mode                       = "bridge"
-  deployment_maximum_percent         = "200"
-  deployment_minimum_healthy_percent = "50"
+  deployment_maximum_percent         = 200
+  deployment_minimum_healthy_percent = 50
   ordered_placement_strategy = [
     {
       type  = "spread"
