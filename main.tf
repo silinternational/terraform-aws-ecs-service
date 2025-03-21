@@ -66,10 +66,14 @@ resource "aws_ecs_service" "service" {
     }
   }
 
-  load_balancer {
-    target_group_arn = var.tg_arn
-    container_name   = var.lb_container_name
-    container_port   = var.lb_container_port
+  dynamic "load_balancer" {
+    for_each = var.load_balancer
+
+    content {
+      container_name   = load_balancer.value.container_name
+      container_port   = load_balancer.value.container_port
+      target_group_arn = load_balancer.value.target_group_arn
+    }
   }
 
   # Track the latest ACTIVE revision
